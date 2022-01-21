@@ -1,6 +1,6 @@
 {
   "family": "nest-container",
-  "exceutionRoleArn": "arn:aws:iam::256640402455:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::256640402455:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "containerDefinitions": [
       {
