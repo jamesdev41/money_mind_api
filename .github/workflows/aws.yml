@@ -50,6 +50,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: nest-container-service-1
+          service: nest-container-service
           cluster: nest-container-cluster
           wait-for-service-stability: true
