@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { USER } from 'src/constants/base.constant';
 import { TokenHelper } from 'src/helpers/token.helper';
 import { ConfigService } from 'src/shared/config/config.service';
 
@@ -11,13 +12,12 @@ export class AuthService {
   constructor(private userService: UsersService, private configService: ConfigService) {}
 
   async login(params: LoginDto) {
-    console.log(params);
     const user = await this.userService.findOne();
     return this._generateToken(user.id);
   }
 
   async verifyUser(id: string) {
-    return this.userService.findById(id);
+    return USER;
   }
 
   private _generateToken(id: string) {
