@@ -39,6 +39,9 @@ import { User } from '../users/entities/user.entity';
             },
             ignoreErrors: true,
           },
+          //logging
+          logging: ['query', 'error'],
+          logger: 'file',
         };
       },
     }),

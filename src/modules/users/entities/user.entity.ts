@@ -58,7 +58,6 @@ export class User extends BaseModel {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword() {
-    console.log(this.password);
     this.password = await EncryptHelper.hash(this.password);
   }
 }
