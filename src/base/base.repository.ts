@@ -30,11 +30,11 @@ export class BaseRepository<Model extends BaseModel> extends EventEmitter {
   }
 
   async findById(id: string, opts?: FindOneOptions<Model>): Promise<Model> {
-    return this.findOne({ where: { id }, ...opts });
+    return classToPlain(await this.findOne({ where: { id }, ...opts })) as any;
   }
 
   async findOne(entity: FindOneOptions<Model>): Promise<Model> {
-    return classToPlain(await this.model.findOne(entity)) as any;
+    return this.model.findOne(entity);
   }
 
   async findByIds(ids: any[], options?: FindManyOptions<Model>): Promise<Model[]> {
@@ -44,6 +44,10 @@ export class BaseRepository<Model extends BaseModel> extends EventEmitter {
   async findAndCount(options?: FindManyOptions<Model>): Promise<[Model[], number]> {
     const [items, count] = await this.model.findAndCount(options);
     return [classToPlain(items) as any, count];
+  }
+
+  async find(options?: FindManyOptions<Model>): Promise<Model[]> {
+    return classToPlain(await this.model.find(options)) as any;
   }
 
   async updateItem(entity: DeepPartial<Model>): Promise<Model> {
@@ -63,7 +67,7 @@ export class BaseRepository<Model extends BaseModel> extends EventEmitter {
   async paginationRepository(
     repository: Repository<Model>,
     options: IPaginationOptions,
-    searchOptions?: FindConditions<Model>,
+    searchOptions?: FindConditions<Model> | FindManyOptions<Model>,
   ): Promise<Pagination<Model, IPaginationMeta>> {
     const pgResult = await paginate(repository, options, searchOptions);
     return {

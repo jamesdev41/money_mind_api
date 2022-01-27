@@ -7,6 +7,9 @@ import userData from './data/users.json';
 
 export default class CreateEndUsers implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
+    // generate random users
+    await factory(User)().createMany(100);
+
     const qb = connection.getRepository(User).createQueryBuilder();
     if (await qb.getOne()) {
       return;
@@ -21,8 +24,5 @@ export default class CreateEndUsers implements Seeder {
       .insert()
       .values(arr as any)
       .execute();
-
-    // generate random users
-    await factory(User)().createMany(5);
   }
 }

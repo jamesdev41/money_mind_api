@@ -1,7 +1,17 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsString } from 'class-validator';
+import { IsNumberString, IsOptional, IsString } from 'class-validator';
 import { IsMatchPattern } from 'src/common/validators/IsMatchPattern.validation';
 import { PASSWORD_PATTERN } from 'src/constants/base.constant';
+
+export class GetListUserDto {
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @IsOptional()
+  @IsNumberString()
+  limit?: string;
+}
 
 export class CreateUserDto {
   @IsString()

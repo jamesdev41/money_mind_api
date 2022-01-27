@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { AuthGuard } from 'src/common/guards/authenticate.guard';
 import { UserType } from 'src/enums/user.enum';
 
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, GetListUserDto, UpdateUserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -11,8 +11,8 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  find() {
-    return this.usersService.findAll();
+  getUsers(@Query() query: GetListUserDto) {
+    return this.usersService.getListUsers(query);
   }
 
   @Post()

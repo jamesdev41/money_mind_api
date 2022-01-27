@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { USER } from 'src/constants/base.constant';
 import { ErrorHelper } from 'src/helpers/error.utils';
 
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, GetListUserDto, UpdateUserDto } from './dto/user.dto';
 import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
   constructor(private userRepository: UsersRepository) {}
-  async findOne() {
-    return USER;
+
+  async findUserByEmail(email: string) {
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async createUser(user: CreateUserDto) {
@@ -20,8 +20,8 @@ export class UsersService {
     return this.userRepository.findById(id);
   }
 
-  async findAll() {
-    return this.userRepository.findAll();
+  async getListUsers(params: GetListUserDto) {
+    return this.userRepository.getListUsers(params);
   }
 
   async updateUser(id: string, params: UpdateUserDto) {
@@ -33,6 +33,6 @@ export class UsersService {
   }
 
   async deleteUser(id: string) {
-    return this.userRepository.removeItem({ id });
+    return this.userRepository.softDeleteItem({ id });
   }
 }

@@ -16,6 +16,11 @@ const MYSQL_DATABASE: string = process.env.MYSQL_DATABASE || NEED_TO_CONFIGURED;
 const MYSQL_USER: string = process.env.MYSQL_USER || NEED_TO_CONFIGURED;
 const MYSQL_PASSWORD: string = process.env.MYSQL_PASSWORD || NEED_TO_CONFIGURED;
 const MYSQL_PORT: number = +process.env.MYSQL_PORT || 3306;
+//cache query
+const CACHE_TYPE: string = process.env.CACHE_TYPE || NEED_TO_CONFIGURED;
+const CACHE_HOST: string = process.env.CACHE_HOST || NEED_TO_CONFIGURED;
+const CACHE_PORT: number = +process.env.CACHE_PORT || 6379;
+
 // phpmyadmin
 const PHPMYADMIN_PORT: number = +process.env.PHPMYADMIN_PORT || 8080;
 
@@ -29,4 +34,7 @@ export {
   MYSQL_PASSWORD,
   MYSQL_PORT,
   PHPMYADMIN_PORT,
+  CACHE_TYPE,
+  CACHE_HOST,
+  CACHE_PORT,
 };
